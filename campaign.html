@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campaign - Nexus Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Enhanced code block for SAVE_CODE v2.0.1 */
+    #saveCodeDisplay {
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      line-height: 1.4;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-height: 600px;
+      overflow-y: auto;
+      background: #1e293b;
+      color: #10b981;
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 2px solid #059669;
+    }
+    
+    /* Custom scrollbar for code block */
+    #saveCodeDisplay::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    #saveCodeDisplay::-webkit-scrollbar-track {
+      background: #0f172a;
+      border-radius: 4px;
+    }
+    
+    #saveCodeDisplay::-webkit-scrollbar-thumb {
+      background: #059669;
+      border-radius: 4px;
+    }
+    
+    #saveCodeDisplay::-webkit-scrollbar-thumb:hover {
+      background: #10b981;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 min-h-screen">
+
+  <header class="bg-slate-900/80 backdrop-blur-sm border-b border-purple-500/30 sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <a href="dashboard.html" class="text-purple-400 hover:text-purple-300">← Back</a>
+        <span class="text-3xl">⚔️</span>
+        <h1 class="text-2xl font-bold text-purple-400" id="campaignTitle">Campaign</h1>
+      </div>
+      
+      <div class="flex items-center gap-4">
+        <a href="dashboard.html" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition">
+          Dashboard
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 py-8">
+    
+    <div id="loading" class="text-center py-20">
+      <div class="inline-block animate-spin rounded-full h-16 w-16 border-b-2 border-purple-400"></div>
+      <p class="text-purple-300 mt-4">Loading campaign...</p>
+    </div>
+
+    <div id="campaignContent" class="hidden space-y-8">
+      
+      <!-- Campaign Header -->
+      <section class="card-document">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <h2 class="text-3xl font-bold mb-2" id="campaignName"></h2>
+            <p class="text-lg" id="campaignSystem"></p>
+          </div>
+          <span class="text-4xl" id="campaignIcon">⚔️</span>
+        </div>
+        <p id="campaignDescription" class="mb-4"></p>
+        
+        <div class="grid grid-cols-2 gap-4 mt-6">
+          <div class="text-center p-4 bg-emerald-100 rounded-lg">
+            <div class="text-3xl font-bold text-emerald-600" id="totalCare">0</div>
+            <div class="text-sm">Total CARE Earned</div>
+          </div>
+          <div class="text-center p-4 bg-blue-100 rounded-lg">
+            <div class="text-3xl font-bold text-blue-600" id="totalSessions">0</div>
+            <div class="text-sm">Sessions Played</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick Actions -->
+      <section class="flex gap-4">
+        <a href="session.html" class="btn-primary flex-1 text-center">
+          📝 Log New Session
+        </a>
+        <button id="copySaveCode" class="btn-secondary flex-1">
+          📋 Copy SAVE_CODE v2.0.1
+        </button>
+      </section>
+
+      <!-- SAVE_CODE Display -->
+      <section class="card-document">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-xl font-bold">SAVE_CODE v2.0.1</h3>
+          <span class="text-xs bg-green-600 text-white px-2 py-1 rounded">SELF-BOOTSTRAPPING</span>
+        </div>
+        
+        <div class="bg-amber-50 border-l-4 border-amber-600 p-4 mb-4 rounded">
+          <p class="text-sm font-semibold text-amber-900 mb-2">🔄 What is SAVE_CODE v2.0.1?</p>
+          <p class="text-sm text-amber-800">
+            This is the full Nexus format that preserves your entire campaign state. 
+            You can paste this into <strong>any AI chat</strong> (Claude, ChatGPT, Gemini, Grok) 
+            and say "Restore Nexus from SAVE_CODE v2.0.1" to continue your adventure anywhere.
+          </p>
+        </div>
+        
+        <pre id="saveCodeDisplay" class="mb-4">
+Generating SAVE_CODE...
+        </pre>
+        
+        <div class="flex gap-2 text-sm text-slate-600">
+          <span>✓ Self-bootstrapping</span>
+          <span>•</span>
+          <span>✓ Database synced</span>
+          <span>•</span>
+          <span>✓ Cross-AI compatible</span>
+        </div>
+      </section>
+
+      <!-- Sessions History -->
+      <section>
+        <h3 class="text-2xl font-bold text-purple-400 mb-4">Session History</h3>
+        <div id="sessionsList" class="space-y-3">
+          <!-- Sessions inserted here -->
+        </div>
+        
+        <div id="noSessions" class="hidden text-center py-12 card-document">
+          <div class="text-6xl mb-4">📖</div>
+          <p class="text-lg mb-2">No sessions yet</p>
+          <p class="text-sm">Log your first session to begin!</p>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <script type="module" src="campaign.js"></script>
+
+</body>
+</html>

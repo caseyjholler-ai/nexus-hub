@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexus Hub - Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-amber-900 to-orange-900 min-h-screen">
+
+  <!-- Navigation Header -->
+  <header class="bg-slate-900/80 backdrop-blur-sm border-b border-amber-500/30 sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <span class="text-3xl">🔥</span>
+        <h1 class="text-2xl font-bold text-amber-400">Nexus Hub</h1>
+      </div>
+      
+      <div class="flex items-center gap-4">
+        <span id="userEmail" class="text-amber-300 text-sm"></span>
+        <button id="logoutBtn" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition">
+          Logout
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 py-8">
+    
+    <!-- Loading State -->
+    <div id="loading" class="text-center py-20">
+      <div class="inline-block animate-spin rounded-full h-16 w-16 border-b-2 border-amber-400"></div>
+      <p class="text-amber-300 mt-4">Loading your multiverse...</p>
+    </div>
+
+    <!-- Main Dashboard Content -->
+    <div id="dashboardContent" class="hidden space-y-8">
+      
+      <!-- CARE Balance - Hero Section -->
+      <section class="bg-gradient-to-r from-amber-600 to-orange-600 rounded-2xl p-8 portal-glow">
+        <div class="text-center">
+          <p class="text-amber-100 text-sm uppercase tracking-wide mb-2">Your CARE Balance</p>
+          <div class="flex items-center justify-center gap-3">
+            <span class="text-6xl md:text-8xl font-bold text-white care-number" id="careBalance">0</span>
+            <span class="text-4xl">♥️</span>
+          </div>
+          <p class="text-amber-100 mt-4">Earn CARE by logging sessions and helping others</p>
+        </div>
+      </section>
+
+      <!-- Ember Egg Section -->
+      <section id="emberEggSection" class="card-document">
+        <!-- Populated by JavaScript -->
+      </section>
+
+      <!-- Quick Actions -->
+      <section class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <a href="session.html" class="card-document text-center group">
+          <div class="text-4xl mb-2 group-hover:scale-110 transition">📝</div>
+          <h3 class="font-bold text-lg">Log Session</h3>
+          <p class="text-sm mt-1">Earn CARE for your adventures</p>
+        </a>
+        
+        <a href="portal.html" class="card-document text-center group">
+          <div class="text-4xl mb-2 group-hover:scale-110 transition">🚪</div>
+          <h3 class="font-bold text-lg">Multiverse Portal</h3>
+          <p class="text-sm mt-1">Jump between campaigns</p>
+        </a>
+        
+        <button id="newCampaignBtn" class="card-document text-center group">
+          <div class="text-4xl mb-2 group-hover:scale-110 transition">➕</div>
+          <h3 class="font-bold text-lg">New Campaign</h3>
+          <p class="text-sm mt-1">Start a fresh adventure</p>
+        </button>
+      </section>
+
+      <!-- Active Campaigns -->
+      <section>
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-2xl font-bold text-amber-400">Your Campaigns</h2>
+          <span id="campaignCount" class="text-amber-300 text-sm">0 active</span>
+        </div>
+        
+        <div id="campaignsList" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Campaign cards inserted here -->
+        </div>
+        
+        <div id="noCampaigns" class="hidden text-center py-12 card-document">
+          <div class="text-6xl mb-4">🗺️</div>
+          <p class="text-lg mb-2">No campaigns yet</p>
+          <p class="text-sm">Start your first adventure to begin your journey</p>
+        </div>
+      </section>
+
+      <!-- Recent Sessions -->
+      <section>
+        <h2 class="text-2xl font-bold text-amber-400 mb-4">Recent Sessions</h2>
+        
+        <div id="sessionsList" class="space-y-3">
+          <!-- Session items inserted here -->
+        </div>
+        
+        <div id="noSessions" class="hidden text-center py-12 card-document">
+          <div class="text-6xl mb-4">📖</div>
+          <p class="text-lg mb-2">No sessions logged yet</p>
+          <p class="text-sm">Log your first session to start earning CARE</p>
+        </div>
+      </section>
+
+      <!-- Dragon Profile -->
+      <section id="dragonSection" class="hidden">
+        <!-- Populated when dragon hatches -->
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- New Campaign Modal -->
+  <div id="newCampaignModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+    <div class="bg-slate-800 rounded-2xl p-8 max-w-md w-full border border-amber-500/30">
+      <h3 class="text-2xl font-bold text-amber-400 mb-4">Create New Campaign</h3>
+      
+      <form id="newCampaignForm" class="space-y-4">
+        <div>
+          <label class="block text-amber-300 mb-2">Campaign Name</label>
+          <input type="text" id="campaignName" required
+                 class="w-full px-4 py-2 bg-slate-700 text-white rounded-lg">
+        </div>
+        
+        <div>
+          <label class="block text-amber-300 mb-2">Game System</label>
+          <select id="campaignSystem" required
+                  class="w-full px-4 py-2 bg-slate-700 text-white rounded-lg">
+            <option value="">Select system...</option>
+            <option value="Fantasy">Fantasy (D&D, Pathfinder)</option>
+            <option value="Sci-Fi">Sci-Fi (Starfinder)</option>
+            <option value="Cyberpunk">Cyberpunk</option>
+            <option value="Horror">Horror</option>
+            <option value="Cozy">Cozy</option>
+            <option value="Custom">Custom System</option>
+          </select>
+        </div>
+        
+        <div>
+          <label class="block text-amber-300 mb-2">Description (optional)</label>
+          <textarea id="campaignDescription" rows="3"
+                    class="w-full px-4 py-2 bg-slate-700 text-white rounded-lg"></textarea>
+        </div>
+        
+        <div class="flex gap-3 mt-6">
+          <button type="submit" class="flex-1 bg-amber-600 hover:bg-amber-700 text-white py-3 rounded-lg font-bold transition">
+            Create Campaign
+          </button>
+          <button type="button" id="cancelCampaignBtn" class="px-6 bg-slate-700 hover:bg-slate-600 text-white py-3 rounded-lg font-bold transition">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="dashboard.js"></script>
+
+</body>
+</html>
