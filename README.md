@@ -56,6 +56,16 @@ MIT License - feel free to use and modify!
 
 ## Author
 
+## Security Note
+
+Firebase configuration is public (as designed by Firebase). 
+Security is enforced through:
+- ✅ Firestore Rules (authentication required)
+- ✅ API key domain restrictions
+- ✅ Only whitelisted domains can access
+
+This is industry-standard practice for Firebase web apps.
+
 **Casey Holler**
 - Twitter: [@VelvetBroadcast](https://twitter.com/VelvetBroadcast)
 - YouTube: [VelvetBroadcast](https://youtube.com/@VelvetBroadcast)
